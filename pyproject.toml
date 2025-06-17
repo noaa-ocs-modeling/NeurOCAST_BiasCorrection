@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "neurocast"
+version = "0.1.0"
+description = "NeurOCAST: a Neural Operator model for spatiotemporal predictions"
+authors = [
+  { name="Atieh Alipour", email="atieh.aalipour@gmail.com" }
+]
+license = { text = "CC0-1.0" }
+readme = "README.md"
+requires-python = ">=3.8"
+
+dependencies = [
+  "torch>=2.0",
+  "numpy",
+  "pytorch-lightning>=2.0",
+  "torch-geometric",
+  "nvidia-physicsnemo"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/AtiehAlipour-NOAA/NeurOCAST_BiasCorrection"
+"Repository" = "https://github.com/AtiehAlipour-NOAA/NeurOCAST_BiasCorrection"
+
+[tool.setuptools]
+packages = ["neurocast"]
