@@ -9,7 +9,7 @@ Applying NeurOCAST for bias correction of STOFS-2D-Global total water level fore
 git clone git@github.com:AtiehAlipour-NOAA/NeurOCAST_BiasCorrection.git
 cd NeurOCAST_BiasCorrection
 pip install -e .
-python scripts/patch_nemo.py
+python patch_nemo.py
 ```
 
 ## Usage

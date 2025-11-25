@@ -11,13 +11,13 @@ k = 0
 start_time = '20210301'
 end_time   = '20241022'
 cycles     = ['00', '06', '12', '18']
-timezone = pytz.timezone('America/New_York') 
+#timezone = pytz.timezone('America/New_York') 
+timezone = pytz.utc
 
-
-Observation_dir = '/lustre/code/BiasCorrection/input/Observation'
-STOFS_dir = '/lustre/code/BiasCorrection/input/STOFS_Data'
-forcing_dir = '/lustre/code/BiasCorrection/input/Data'
-stations     = pd.read_csv('/lustre/code/BiasCorrection/input/stations.csv')
+Observation_dir = '/lustre/code/BiasCorrection/Codes/Observation'
+STOFS_dir = '/lustre/code/BiasCorrection/Codes/STOFS_Data'
+forcing_dir = '/lustre/code/BiasCorrection/Codes/Data'
+stations     = pd.read_csv('/lustre/code/BiasCorrection/Codes/stations.csv')
 
 
 start_date = datetime.strptime(start_time, '%Y%m%d')
@@ -151,6 +151,6 @@ y = np.array(y)
 all_time = np.array(all_time)
 
 
-np.save('x_array_4_years.npy', x)
-np.save('y_array_4_years.npy', y)
-np.save('time_array_4_years.npy', all_time)
+np.save('x_array_4_years_utc.npy', x)
+np.save('y_array_4_years_utc.npy', y)
+np.save('time_array_4_years_utc.npy', all_time)

@@ -118,18 +118,21 @@ class NeurOCAST(nn.Module):
         self.fc2 = nn.Linear(base_width * 2, output_channels)
 
     def forward(self, x, edge_index, x_loc):
+        
         grid = self.get_grid(x.shape, x.device)
         x = torch.cat((x, grid), dim=1)
         x = F.pad(x, [self.padding, self.padding], mode='reflect')
+        final_size = x.shape[2]
         x = x.squeeze().permute(0, 2, 1)
         x = self.fc0(x).permute(0, 2, 1)
-
         for fno, gno, target_size in zip(self.fno_layers, self.gno_layers, self.resample_strategy):
             x = fno(x)
             if target_size is not None:
                 x = self.resample_tensor(x, target_size)
             x = gno(x, edge_index, x_loc)
+    
         x = self.final_fno(x)
+        x = self.resample_tensor(x, final_size/x.shape[2])
         x = x[..., self.padding:-self.padding]
         x = x.permute(0, 2, 1)
         x = F.gelu(self.fc1(x))
@@ -144,4 +147,4 @@ class NeurOCAST(nn.Module):
 
     @torch.compile
     def resample_tensor(self, x, size):
-        return F.interpolate(x, size=size, mode='linear', align_corners=True)
+        return F.interpolate(x, size=round(size*x.shape[2]), mode='linear', align_corners=True)
